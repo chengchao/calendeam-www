@@ -1,0 +1,25 @@
+# Ignore build and output directories
+node_modules/
+out/
+dist/
+
+# Ignore generated files
+*.js
+*.d.ts
+*.md
+
+# Ignore configuration files
+# .eslint*
+.prettier*
+tsconfig*
+
+.gitignore
+.husky/
+components.json
+next.*
+package-lock.json
+pnpm-lock.yaml
+package.json
+public/
+*.ico
+tailwind.config.ts
