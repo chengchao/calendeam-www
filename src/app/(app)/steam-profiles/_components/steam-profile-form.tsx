@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -33,6 +35,8 @@ const formSchema = z.object({
 export type FormValues = z.infer<typeof formSchema>;
 
 export function SteamProfileForm() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,6 +50,8 @@ export function SteamProfileForm() {
     setPending(true);
     await createSteamProfile(values.steamId);
     setPending(false);
+    toast.success("Steam profile created successfully");
+    router.push("/steam-profiles");
   }
 
   const [pending, setPending] = useState(false);
