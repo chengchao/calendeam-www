@@ -1,5 +1,7 @@
 "use server";
 
+import { redirect } from "next/navigation";
+
 import * as SteamProfilesService from "@/lib/steam-profiles/steam-profiles.service";
 
 export async function createSteamProfile(steamId: string) {
@@ -7,5 +9,6 @@ export async function createSteamProfile(steamId: string) {
 }
 
 export async function deleteSteamProfile(steamId: string) {
-  return await SteamProfilesService.deleteSteamProfile(steamId);
+  await SteamProfilesService.deleteSteamProfile(steamId);
+  redirect("/steam-profiles");
 }
