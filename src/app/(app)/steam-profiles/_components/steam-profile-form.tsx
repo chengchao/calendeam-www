@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { addSteamId } from "../_actions/add-steam-id";
+import { createSteamProfile } from "../_actions";
 
 const formSchema = z.object({
   steamId: z.string().min(1),
@@ -44,7 +44,7 @@ export function SteamProfileForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     setPending(true);
-    await addSteamId(values);
+    await createSteamProfile(values.steamId);
     setPending(false);
   }
 
