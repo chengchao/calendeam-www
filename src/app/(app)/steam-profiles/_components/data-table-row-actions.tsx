@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Row } from "@tanstack/react-table";
 import { Ellipsis } from "lucide-react";
 
@@ -36,6 +37,7 @@ async function handleDelete(steamProfileId: string) {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
+  const router = useRouter();
   const steamProfile = steamProfileSchema.parse(row.original);
 
   return (
@@ -76,6 +78,7 @@ export function DataTableRowActions<TData>({
           <form
             onSubmit={async () => {
               await handleDelete(steamProfile.id);
+              router.refresh();
             }}
           >
             <Button variant="destructive" type="submit">
