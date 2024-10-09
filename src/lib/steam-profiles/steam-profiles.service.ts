@@ -22,6 +22,17 @@ export async function getSteamProfilesByUserId(userId: string) {
   const steamProfilesJson = await response.json();
   const steamProfiles = steamProfilesSchema.parse(steamProfilesJson);
 
+  steamProfiles.forEach((steamProfile) => {
+    if (!steamProfile.releaseDateIcsKey) {
+      return;
+    }
+
+    const fileName = steamProfile.releaseDateIcsKey?.split("/").pop();
+    const steamId = steamProfile.steamId;
+    const url = `${process.env.CLOUDFLARE_WORKER_DOMAIN}/wishlists/steam-profiles/${steamId}/ics/${fileName}`;
+    steamProfile.releaseDateIcsFileUrl = url;
+  });
+
   return steamProfiles;
 }
 

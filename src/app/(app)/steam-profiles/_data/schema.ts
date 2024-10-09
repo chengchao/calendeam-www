@@ -6,6 +6,7 @@ export const steamProfileSchema = z.object({
   id: z.string(),
   userId: z.string(),
   steamId: z.string(),
+  releaseDateIcsFileUrl: z.string().optional(),
 });
 
 export type SteamProfile = z.infer<typeof steamProfileSchema>;

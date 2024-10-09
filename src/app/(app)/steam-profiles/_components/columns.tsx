@@ -11,6 +11,24 @@ export const columns: ColumnDef<SteamProfile>[] = [
     header: "Steam profile id",
   },
   {
+    accessorKey: "releaseDateIcsFileUrl",
+    header: "Release date ICalender file",
+    cell: ({ row }) => {
+      const steamProfile = row.original;
+      const { releaseDateIcsFileUrl } = steamProfile;
+
+      return (
+        <>
+          {releaseDateIcsFileUrl ? (
+            <span>{releaseDateIcsFileUrl}</span>
+          ) : (
+            <span>Not ready</span>
+          )}
+        </>
+      );
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
